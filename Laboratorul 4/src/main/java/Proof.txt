@@ -1,0 +1,4 @@
+Prove that in the case of SAP with ties, a problem may have multiple stable matchings,
+not all of the same size.
+
+We already know that SAP without ties, creates a stable matching,
