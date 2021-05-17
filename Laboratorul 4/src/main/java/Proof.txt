@@ -3,4 +3,8 @@ not all of the same size.
 
 We already know that SAP with strict preferences, creates a stable matching.
 
-Let's take a case where
+Let's take the simplified case in which a school doesn't have strict preferences, but every student has a strict list with the schools they want to attend.
+Asuuming that every student has a spot in a school, then in the case that only one school has 2 students on the same rank in the classament, 
+and the kids have their schools ranked in the same manner, there will be at least 2 stable matchings.
+We can conclude that as we enlarge the number of schools and students founf on the same spot in the classameent, the number of possible stable matchings would also enlarge,having the minimum of 1 stable matching being made. 
+The minimal number remanains 1 because as a student would eventually 'prupose' to every school, and every student has a spot, then at least 1 stable matching would be made 
