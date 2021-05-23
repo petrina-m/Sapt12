@@ -9,30 +9,33 @@ import java.util.UUID;
 @Entity
 @Table(name = "games")
 public class Game {
+//    @SequenceGenerator(name = "game_sequence", sequenceName = "game_sequence",allocationSize =1)
+//    @GeneratedValue(
+//            strategy = GenerationType.SEQUENCE,
+//            generator = "game_sequence"
+//    )
     @Id
-    @SequenceGenerator(name = "game_sequence", sequenceName = "game_sequence",allocationSize =1)
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "game_sequence"
-    )
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(nullable = false, unique = true)
     private Integer gameID;
 
-//    @OneToOne
-//    @JoinColumn(name = "player1",nullable = true)
-    @OneToOne(targetEntity = Player.class)
+    //    @OneToOne
+    //    @JoinColumn(name = "player1",nullable = true)
+    @OneToOne(targetEntity = Player.class, cascade = {CascadeType.ALL})
     Player player1;
 
 //    @OneToOne
 //    @JoinColumn(name = "player2",nullable = true)
-    @OneToOne(targetEntity = Player.class)
+    @OneToOne(targetEntity = Player.class, cascade = {CascadeType.ALL})
     Player player2;
 
 //    @OneToOne
 //    @JoinColumn(name = "winner",nullable = true)
-    @OneToOne(targetEntity = Player.class)
+    @OneToOne(targetEntity = Player.class, cascade = {CascadeType.ALL})
     private Player winner;
 
     private GameStatus status;
+
     @ElementCollection
     private List<String> WordsUsed;
 
@@ -51,7 +54,7 @@ public class Game {
 
 
    // @Id
-    public int getGameID() {
+    public Integer getGameID() {
         return gameID;
     }
 
