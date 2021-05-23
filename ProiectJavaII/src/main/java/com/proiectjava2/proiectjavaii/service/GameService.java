@@ -137,7 +137,6 @@ public class GameService {
             }
         }
 
-        //TODO de verificat daca cuv este din dinctionar
         if (dictionary == null) {
             try {
                 dictionary = new Dictionary();
@@ -147,7 +146,6 @@ public class GameService {
         }
 
         boolean inDictionary = dictionary.contains(word);
-//        System.out.println(word + " is " + (inDictionay ? "" : "NOT ") + "in dictionary!");
 
         if (!inDictionary) { //cuvantul nu este din dictionar
             if (FirstPlayerID.equals(idLastPlayer)) //primul jucator a facut ultima miscare
@@ -156,13 +154,42 @@ public class GameService {
                 return FirstPlayerID;
         }
 
+        //verific daca cuvantul are cel putin 2 litere
+        if(word.length()<2) { //cuvantul are mai putin de 2 litere
+            if (FirstPlayerID.equals(idLastPlayer))
+                return SecondPlayerID;
+            else if (SecondPlayerID.equals(idLastPlayer))
+                return FirstPlayerID;
+        }
+
+
+        //verific daca se respecta regula
+        if (wordsUsed.size()>0) {
+            //daca exista cuvinte precedente
+            boolean respectRule = respectRule(wordsUsed.get(wordsUsed.size() - 1), word); //ultimul cuvant din lista si noul cuvant introdus
+            if (!respectRule) { //cuvantul nu respecta regula
+                if (FirstPlayerID.equals(idLastPlayer))
+                    return SecondPlayerID;
+                else if (SecondPlayerID.equals(idLastPlayer))
+                    return FirstPlayerID;
+            }
+
+        }
         return -1L;
     }
 
-    private boolean checkWord(String word)
+    private boolean respectRule(String lastWord, String newWord)
     {
+            //ultimele 2 litere din lastWord trebuie sa corespunda cu primele 2 din newWord
 
-        return false;
+        String Last2=lastWord.substring(lastWord.length()-2);
+        String First2=newWord.substring(0,2);
+        if(Last2.equals(First2))
+            return true; //respecta regula
+        else
+            return false;
+
+
     }
 }
 
