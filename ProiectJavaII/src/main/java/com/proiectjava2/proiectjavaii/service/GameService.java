@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 @Service
 public class GameService {
@@ -111,16 +112,16 @@ public class GameService {
         return game;
     }
 
-    private Boolean checkWinner(List<String> wordsUsed, String word, Long idLastPlayer, Long id) {
-        //as putea returna si id-ul castigatorului sau -1 altffel
-        //as putea returna true/false in functie de jucatorul pe care il verifc
-
-        //daca cuvantul a mai fost folosit inainte de catre un jucator
-        //jucatorul pentru care verficam a facut ultima miscare
-        if (wordsUsed.contains(word))
-            return !id.equals(idLastPlayer); //nu e castigator
-        return false;
-    }
+//    private Boolean checkWinner(List<String> wordsUsed, String word, Long idLastPlayer, Long id) {
+//        //as putea returna si id-ul castigatorului sau -1 altffel
+//        //as putea returna true/false in functie de jucatorul pe care il verifc
+//
+//        //daca cuvantul a mai fost folosit inainte de catre un jucator
+//        //jucatorul pentru care verficam a facut ultima miscare
+//        if (wordsUsed.contains(word))
+//            return !id.equals(idLastPlayer); //nu e castigator
+//        return false;
+//    }
 
     private Long checkWinner(List<String> wordsUsed, String word, Long idLastPlayer, Long FirstPlayerID, Long SecondPlayerID) {
         //as putea returna si id-ul castigatorului sau -1 altffel
@@ -183,6 +184,7 @@ public class GameService {
             //ultimele 2 litere din lastWord trebuie sa corespunda cu primele 2 din newWord
 
         String Last2=lastWord.substring(lastWord.length()-2);
+       newWord= newWord.toLowerCase();
         String First2=newWord.substring(0,2);
         if(Last2.equals(First2))
             return true; //respecta regula
